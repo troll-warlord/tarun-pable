@@ -41,6 +41,7 @@ const layoutClasses = [
         <div v-for="(photo, index) in photos.slice(0, 6)" :key="index" :class="[layoutClasses[index], 'photo-node relative group overflow-hidden bg-zinc-950']">
           <img
             :src="photo.url"
+            loading="lazy"
             :alt="photo.title"
             class="w-full h-full object-cover transition-all duration-700 ease-in-out filter grayscale group-hover:grayscale-0 opacity-50 group-hover:opacity-100 scale-100 group-hover:scale-110"
           />
@@ -85,3 +86,4 @@ const layoutClasses = [
   backface-visibility: hidden;
 }
 </style>
+
