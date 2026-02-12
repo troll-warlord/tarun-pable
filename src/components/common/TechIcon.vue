@@ -15,8 +15,6 @@ defineProps({
 })
 
 const getIconUrl = (slug) => {
-  // eslint-disable-next-line no-console
-  console.log(slug)
   return new URL(`../../assets/icons/${slug}.svg`, import.meta.url).href
 }
 </script>
@@ -31,3 +29,4 @@ const getIconUrl = (slug) => {
     </span>
   </div>
 </template>
+
