@@ -29,5 +29,3 @@ const getIconUrl = (slug) => {
     </span>
   </div>
 </template>
-
-
