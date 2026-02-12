@@ -48,7 +48,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           <span class="text-emerald-500 font-bold text-xs animate-pulse">></span>
           <span class="text-zinc-100 text-[12px] font-black uppercase tracking-[0.2em] group-hover:text-emerald-400 transition-colors"> TARUN_PABLE </span>
           <span class="text-white/10 mx-1">|</span>
-          <span class="text-mono-label opacity-60 hidden sm:inline">Cloud_Arch</span>
+          <span class="text-mono-label opacity-60 inline">Cloud_Arch</span>
         </div>
       </div>
 
