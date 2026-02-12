@@ -25,7 +25,7 @@ defineProps({
 
     <h3 class="section-heading">
       {{ main }}
-      <span v-if="secondary" class="text-zinc-700 italic ml-2 md:ml-2">
+      <span v-if="secondary" class="text-zinc-500 italic ml-2 md:ml-2">
         {{ secondary }}
       </span>
     </h3>
