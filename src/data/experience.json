@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "company": "Körber Pharma Software GmbH",
+    "role": "Senior Cloud Engineer",
+    "slug": "koerber",
+    "period": "Current",
+    "summary": "The 'Cloud Whisperer' stage. I spend my days convincing different cloud providers to play nice together while making sure the bill doesn't look like a phone number.",
+    "impact": [
+      "Architected a unified, cloud-agnostic deployment engine that treats AWS, Azure, and OpenStack like a single playground.",
+      "Developed a custom Kubernetes Operator (Kopf) to automate application lifecycles, effectively teaching the cluster to manage itself.",
+      "Standardized the entire CI/CD ecosystem across GitHub Actions and Azure DevOps, turning 'it works on my machine' into 'it works on every cloud.'",
+      "Acted as the technical bridge between Dev and Infra, translating 'code-speak' into 'server-speak' and mentoring the next generation of engineers."
+    ]
+  },
+  {
+    "id": 2,
+    "company": "Here Solutions Pvt Ltd",
+    "role": "Senior DevOps Engineer",
+    "slug": "here",
+    "period": "Previous",
+    "summary": "Master of Observability. If a tree falls in a 1,500-node cluster and Prometheus didn't scrape it, did it even happen? (Hint: Yes, and I fixed the alert for it).",
+    "impact": [
+      "Slashed infrastructure costs by 50% through a total redesign of the monitoring architecture—proving that better visibility shouldn't cost more than the app.",
+      "Hardened the observability stack (Thanos/Prometheus) to survive sudden 50% spikes in node count without breaking a sweat or losing a single metric.",
+      "Reworked the entire logging pipeline with Fluentd and Splunk, ensuring logs move faster than the bugs that create them.",
+      "Automated the 'boring stuff'—from health checks to onboarding—saving the team hundreds of manual hours and several headaches."
+    ]
+  },
+  {
+    "id": 3,
+    "company": "Ingram Micro SSC India Pvt Ltd",
+    "role": "Senior Software Engineer",
+    "slug": "ingram-micro",
+    "period": "Early Career",
+    "summary": "The Great Migration. I helped turn giant, scary monoliths into neat little containers and taught them how to live in GKE.",
+    "impact": [
+      "Led the strategic migration from 'traditional' servers to GKE, containerizing everything that wasn't bolted down.",
+      "Standardized application deployments using the holy trinity of Helm, Kustomize, and Skaffold.",
+      "Built a full-stack bridge using PHP and Vue.js, proving I can write the frontend code just as well as the pipelines that deploy it.",
+      "Championed automated testing (Selenium/JMeter), ensuring that our speed to production didn't come at the cost of breaking things."
+    ]
+  }
+]

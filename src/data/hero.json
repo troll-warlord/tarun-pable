@@ -1,0 +1,10 @@
+{
+  "title": "Architecting the",
+  "highlight": "Invisible.",
+  "subtitle": "Senior Cloud Engineer specializing in high-availability systems, multi-cloud orchestration, and infrastructure that doesn't wake you up at 3 AM.",
+  "metrics": [
+    { "label": "Uptime", "value": "99.99%", "status": "nominal" },
+    { "label": "Clusters", "value": "Active", "status": "healthy" },
+    { "label": "Latency", "value": "24ms", "status": "optimized" }
+  ]
+}

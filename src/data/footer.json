@@ -1,0 +1,12 @@
+{
+  "socialLinks": [
+    { "name": "GitHub", "url": "https://github.com/yourusername", "icon": "GH", "color": "hover:border-white hover:text-white" },
+    { "name": "LinkedIn", "url": "https://linkedin.com/in/yourusername", "icon": "LI", "color": "hover:border-blue-400 hover:text-blue-400" },
+    { "name": "Twitter", "url": "https://x.com/yourusername", "icon": "X", "color": "hover:border-emerald-400 hover:text-emerald-400" }
+  ],
+  "systemSpecs": [
+    { "label": "Env", "value": "Prod" },
+    { "label": "Uptime", "value": "99.9%" },
+    { "label": "V", "value": "3.5" }
+  ]
+}
