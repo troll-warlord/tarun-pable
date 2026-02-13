@@ -3,17 +3,37 @@
 /* 1. Global Reset & Base Styles */
 @layer base {
   :root {
-    color-scheme: dark;
+    /* --- COLOR PALETTE (The Single Source of Truth) --- */
+
+    /* The Main Accent (Was: Emerald-500) */
+    --primary: #10b981;
+    /* The Glow/Shadow color (Was: Emerald-500/50) */
+    --primary-glow: rgba(16, 185, 129, 0.5);
+    /* The Dark Button color (Was: Emerald-900) */
+    --primary-dark: #064e3b;
+
+    /* Backgrounds */
+    --bg-deep: #09090b; /* Was: Zinc-950 */
+    --bg-surface: #18181b; /* Was: Zinc-900 */
+    --bg-panel: rgba(255, 255, 255, 0.05); /* Was: white/5 */
+
+    /* Typography Colors */
+    --text-main: #f4f4f5; /* Was: Zinc-100 */
+    --text-body: #d4d4d8; /* Was: Zinc-300 */
+    --text-muted: #71717a; /* Was: Zinc-500 */
+
+    /* Interaction */
     --mouse-x: 50%;
     --mouse-y: 50%;
   }
 
   html {
-    @apply scroll-smooth selection:bg-emerald-500/30 selection:text-emerald-200;
+    /* using arbitrary values [...] lets us use our variables instantly */
+    @apply scroll-smooth selection:bg-[var(--primary)] selection:text-black;
   }
 
   body {
-    @apply bg-zinc-950 text-zinc-300 antialiased font-sans;
+    @apply bg-[var(--bg-deep)] text-[var(--text-body)] antialiased font-sans;
   }
 }
 
@@ -21,13 +41,15 @@
 @layer components {
   /* --- LAYOUT & CONTAINERS --- */
   .section-container {
-    @apply relative py-24 px-6 md:px-12 lg:px-24 border-t border-white/5 overflow-hidden;
+    /* Use var(--bg-panel) for the subtle border */
+    @apply relative py-24 px-6 md:px-12 lg:px-24 border-t border-[var(--bg-panel)] overflow-hidden;
   }
 
   @media (min-width: 768px) {
     .bg-grid {
       @apply absolute inset-0;
-      background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      /* Using var(--bg-panel) ensures grid lines match your border color */
+      background-image: linear-gradient(var(--bg-panel) 1px, transparent 1px), linear-gradient(90deg, var(--bg-panel) 1px, transparent 1px);
       background-size: 20px 20px;
 
       transition:
@@ -40,11 +62,12 @@
 
     .grid-glow {
       @apply absolute inset-0;
-      background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(16, 185, 129, 0.04), transparent 100%);
+      /* We use color-mix to make the primary color very transparent (4%) for the glow */
+      background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), color-mix(in srgb, var(--primary), transparent 96%), transparent 100%);
     }
   }
 
-  /* Fallback for mobile: Keep it clean and dark */
+  /* Fallback for mobile */
   @media (max-width: 767px) {
     .bg-grid,
     .grid-glow {
@@ -54,33 +77,35 @@
 
   /* --- TYPOGRAPHY HIERARCHY --- */
   .heading-xl {
-    /* Used for Hero Title */
-    @apply font-sans font-black text-5xl md:text-7xl lg:text-8xl text-zinc-100 uppercase tracking-tighter leading-[0.9];
+    /* Changed text-zinc-100 -> text-[var(--text-main)] */
+    @apply font-sans font-black text-5xl md:text-7xl lg:text-8xl text-[var(--text-main)] uppercase tracking-tighter leading-[0.9];
   }
 
   .heading-lg {
-    /* Used for Section Headers & Card Titles */
-    @apply font-sans font-black text-2xl md:text-3xl text-zinc-100 uppercase tracking-tighter leading-tight;
+    /* Changed text-zinc-100 -> text-[var(--text-main)] */
+    @apply font-sans font-black text-2xl md:text-3xl text-[var(--text-main)] uppercase tracking-tighter leading-tight;
   }
 
   .text-mono-label {
-    /* Used for small technical labels */
-    @apply font-mono text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase text-emerald-500/80;
+    /* Changed text-emerald-500/80 -> text-[var(--primary)] with opacity */
+    @apply font-mono text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase text-[var(--primary)] opacity-90;
   }
 
   .text-body-muted {
-    /* Used for descriptions - removes the "too white" look */
-    @apply text-zinc-500 text-sm md:text-base leading-relaxed font-medium italic transition-colors;
+    /* Changed text-zinc-500 -> text-[var(--text-muted)] */
+    @apply text-[var(--text-muted)] text-sm md:text-base leading-relaxed font-medium italic transition-colors;
   }
 
   /* --- SHARED CARD ARCHITECTURE --- */
   .infra-card {
-    /* The base for Projects and Experience cards */
-    @apply relative flex flex-col px-8 py-10 transition-all duration-500 border-l border-white/5 bg-transparent;
+    /* bg-transparent ensures it doesn't clash with the global background */
+    @apply relative flex flex-col px-8 py-10 transition-all duration-500 border-l border-[var(--bg-panel)] bg-transparent;
   }
 
   .infra-card:hover {
-    @apply border-emerald-500/50 bg-emerald-500/2;
+    /* We use color-mix to create a faint primary background on hover (2% opacity) */
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary), transparent 98%);
   }
 
   /* --- UI ELEMENTS --- */
@@ -90,46 +115,57 @@
   }
 
   .status-node-active {
-    @apply bg-emerald-500 border-emerald-500/50 shadow-[0_0_12px_rgba(16,185,129,0.5)];
+    /* Uses --primary and --primary-glow for that "pulsing" server look */
+    @apply bg-[var(--primary)] border-[var(--primary)] shadow-[0_0_12px_var(--primary-glow)];
   }
 
   .status-node-pending {
-    @apply bg-zinc-800 border-white/10;
+    @apply bg-[var(--bg-surface)] border-[var(--bg-panel)];
   }
 
   .tech-icon-wrapper {
-    /* The square box for technology icons */
-    @apply w-10 h-10 rounded-sm bg-zinc-900 border border-white/5 p-2 flex items-center justify-center transition-all duration-500;
+    @apply w-10 h-10 rounded-sm bg-[var(--bg-surface)] border border-[var(--bg-panel)] p-2 flex items-center justify-center transition-all duration-500;
   }
 
   .btn-primary {
-    /* High-contrast action buttons */
-    @apply px-6 py-3 bg-emerald-900/60 text-zinc-100 font-mono text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-emerald-900 transition-all;
+    /* Uses --primary-dark for the button and --text-main for the font */
+    @apply px-6 py-3 bg-[var(--primary-dark)]/60 text-[var(--text-main)] font-mono text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-[var(--primary-dark)] transition-all;
+    border: 1px solid var(--primary);
   }
 
   .btn-outline {
-    /* Subtle secondary buttons */
-    @apply px-6 py-3 border border-white/10 text-zinc-400 font-mono text-[10px] font-bold uppercase tracking-[0.2em] hover:text-zinc-100 hover:bg-white/5 transition-all;
+    @apply px-6 py-3 border border-[var(--bg-panel)] text-[var(--text-muted)] font-mono text-[10px] font-bold uppercase tracking-[0.2em] hover:text-[var(--text-main)] hover:bg-[var(--bg-panel)] transition-all;
   }
 
   /* Experience Log Entry */
   .log-entry {
-    @apply relative pl-6 py-4 border-l-2 border-emerald-500/10 hover:border-emerald-500 transition-colors bg-white/5 rounded-r-sm;
+    @apply relative pl-6 py-4 border-l-2 transition-colors rounded-r-sm;
+    border-color: color-mix(in srgb, var(--primary), transparent 90%);
+    background-color: var(--bg-panel);
+  }
+  .log-entry:hover {
+    border-color: var(--primary);
   }
 
   /* Compact Tech Grid Item */
   .tech-pill {
-    @apply flex items-center gap-3 px-4 py-2 bg-zinc-900 border border-white/5 rounded-sm transition-all hover:border-emerald-500/30;
+    @apply flex items-center gap-3 px-4 py-2 border rounded-sm transition-all;
+    background-color: var(--bg-surface);
+    border-color: var(--bg-panel);
+  }
+  .tech-pill:hover {
+    border-color: color-mix(in srgb, var(--primary), transparent 70%);
   }
 
   .section-label {
-    @apply font-mono text-[10px] md:text-[11px] font-bold uppercase mb-2 opacity-60 tracking-widest text-zinc-500;
+    @apply font-mono text-[10px] md:text-[11px] font-bold uppercase mb-2 opacity-60 tracking-widest;
+    color: var(--text-muted);
   }
 
   .section-heading {
-    @apply font-sans font-black text-3xl md:text-6xl uppercase tracking-tighter text-zinc-100 leading-[0.9] mb-6;
+    @apply font-sans font-black text-3xl md:text-6xl uppercase tracking-tighter leading-[0.9] mb-6;
+    color: var(--text-main);
   }
-
   /* The Container for the "Pipe + Text" combo */
   .pipe-description {
     @apply flex items-start gap-4 max-w-2xl;
@@ -178,9 +214,7 @@
   /* Custom Scrollbar for the Impact Log area */
   .custom-log-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: rgba(16, 185, 129, 0.3) transparent;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
+    scrollbar-color: color-mix(in srgb, var(--primary), transparent 70%) transparent;
   }
 
   .custom-log-scrollbar::-webkit-scrollbar {
@@ -208,12 +242,15 @@
   /* --- 4. ABOUT SECTION & CONSOLE (REFINED) --- */
 
   .console-wrapper {
-    @apply flex flex-row lg:flex-row gap-0 lg:gap-8 h-[550px] md:h-[500px] border border-white/5 bg-zinc-900/10 rounded-xl overflow-hidden;
+    @apply flex flex-row lg:flex-row gap-0 lg:gap-8 h-[550px] md:h-[500px] border rounded-xl overflow-hidden;
+    border-color: var(--bg-panel);
+    background-color: color-mix(in srgb, var(--bg-surface), transparent 90%);
   }
 
   .console-sidebar {
-    /* Mobile: Right (order-2), Laptop: Left (order-1) */
-    @apply order-2 lg:order-1 w-[40%] lg:w-72 border-l lg:border-l-0 lg:border-r border-white/5 bg-zinc-900/30 flex flex-col;
+    @apply order-2 lg:order-1 w-[40%] lg:w-72 border-l lg:border-l-0 lg:border-r flex flex-col;
+    border-color: var(--bg-panel);
+    background-color: color-mix(in srgb, var(--bg-surface), transparent 70%);
   }
 
   .console-viewport {
@@ -236,12 +273,18 @@
   }
 
   .console-btn-active {
-    /* Border-l-2 acts as the "Active" pointer on the split-seam for mobile */
-    @apply bg-emerald-500/10 text-emerald-400 border-r-2 border-l-0 md:border-r-0 md:border-l-2 border-emerald-500;
+    @apply text-[var(--primary)] border-r-2 border-l-0 md:border-r-0 md:border-l-2;
+    border-color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary), transparent 90%);
   }
 
   .console-card {
-    @apply flex items-center gap-4 lg:flex-col lg:justify-center lg:items-center p-3 lg:p-6 bg-zinc-950/40 lg:bg-zinc-900/40 border border-white/5 rounded-md hover:border-emerald-500/30 transition-all duration-300;
+    @apply flex items-center gap-4 lg:flex-col lg:justify-center lg:items-center p-3 lg:p-6 border rounded-md transition-all duration-300;
+    border-color: var(--bg-panel);
+    background-color: color-mix(in srgb, var(--bg-deep), transparent 60%);
+  }
+  .console-card:hover {
+    border-color: color-mix(in srgb, var(--primary), transparent 70%);
   }
 
   /* Ensure icons don't dominate the screen on mobile vertical list */
@@ -262,6 +305,7 @@
     opacity: 0;
     transform: translateX(8px);
   }
+
   /* Inter */
   @font-face {
     font-family: 'Inter';
