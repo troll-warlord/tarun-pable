@@ -3,7 +3,7 @@
     "id": "aws-immutable-01",
     "title": "Immutable Cloud Pipeline",
     "description": "High-availability AWS deployment using Terraform and GitHub Actions. Implements zero-trust security layers, automated failover strategies, and real-time monitoring.",
-    "tech": ["AWS", "Terraform", "GitHub-light", "Linux" ,"Kubernetes", "Helm", "Docker"],
+    "tech": ["AWS-light", "Terraform", "GitHub-light", "Linux" ,"Kubernetes-light", "Helm", "Docker"],
     "status": "live",
     "links": {
       "demo": "https://demo-app.com",
@@ -14,7 +14,7 @@
     "id": "k8s-mesh-v2",
     "title": "K8s Mesh Orchestration",
     "description": "Enterprise-scale EKS cluster management with Istio service mesh. Features traffic shifting, mTLS encryption, and observability via Prometheus/Grafana.",
-    "tech": ["Kubernetes", "Docker", "Python"],
+    "tech": ["Kubernetes-light", "Docker", "Python"],
     "status": "live",
     "links": {
       "repo": "https://github.com/username/mesh-ops"

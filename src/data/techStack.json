@@ -4,24 +4,24 @@
       "name": "Certified Kubernetes Application Developer",
       "id": "CKAD-LFS258",
       "org": "CNCF",
-      "slug": "kubernetes",
+      "slug": "kubernetes-light",
       "status": "Active"
     },
     {
       "name": "AWS Solution Architect - Associate",
       "id": "AWS-ASA-9921",
       "org": "AWS",
-      "slug": "aws",
+      "slug": "aws-light",
       "status": "Active"
     }
   ],
   "cloud_platforms": [
-    { "name": "AWS", "slug": "aws" },
+    { "name": "AWS", "slug": "aws-light" },
     { "name": "Azure", "slug": "azure" },
     { "name": "GCP", "slug": "google-cloud" }
   ],
   "orchestration_logic": [
-    { "name": "Kubernetes", "slug": "kubernetes" },
+    { "name": "Kubernetes", "slug": "kubernetes-light" },
     { "name": "Helm", "slug": "helm" },
     { "name": "Docker", "slug": "docker" },
     { "name": "ArgoCD", "slug": "argo-cd" }
