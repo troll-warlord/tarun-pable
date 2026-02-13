@@ -1,9 +1,20 @@
 [
   {
+    "id": "infra-portfolio-v4",
+    "title": "Architect Portfolio v4",
+    "description": "High-performance, localized portfolio engine. Featuring smooth-scroll orchestration, GSAP-driven state transitions, and a decoupled CSS-variable design system for rapid theming.",
+    "tech": ["Vue-js", "javascript", "Tailwind-css", "css", "html", "GitHub-light", "Github-actions"],
+    "status": "live",
+    "links": {
+      "demo": "https://troll-wardlord.github.io/tarun-pable/",
+      "repo": "https://github.com/troll-warlord/tarun-pable"
+    }
+  },
+  {
     "id": "aws-immutable-01",
     "title": "Immutable Cloud Pipeline",
     "description": "High-availability AWS deployment using Terraform and GitHub Actions. Implements zero-trust security layers, automated failover strategies, and real-time monitoring.",
-    "tech": ["AWS-light", "Terraform", "GitHub-light", "Linux" ,"Kubernetes-light", "Helm", "Docker"],
+    "tech": ["AWS-light", "Terraform", "GitHub-light", "Linux", "Kubernetes-light", "Helm", "Docker"],
     "status": "live",
     "links": {
       "demo": "https://demo-app.com",
