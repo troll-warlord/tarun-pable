@@ -7,7 +7,7 @@ const isLive = computed(() => props.project.status === 'live')
 </script>
 
 <template>
-  <div class="infra-card group relative p-8 md:p-10 h-full flex flex-col console-card transition-all duration-300">
+  <div class="group relative p-8 md:p-10 h-full flex flex-col project-card">
     <!-- Header row: deployment ref + status badge -->
     <div class="relative z-10 flex justify-between items-start mb-10 pl-2">
       <div class="flex flex-col gap-1.5">
@@ -86,8 +86,8 @@ const isLive = computed(() => props.project.status === 'live')
 
 <style scoped>
 @reference "tailwindcss";
-.console-card {
-  @apply gap-4 border rounded-md transition-all duration-300;
+.project-card {
+  @apply relative flex flex-col border rounded-md transition-all duration-300;
   border-color: var(--clr-edge);
   background-color: color-mix(in srgb, var(--clr-bg-base), transparent 60%);
 
