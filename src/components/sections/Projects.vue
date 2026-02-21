@@ -8,10 +8,10 @@ const header = SECTION_HEADERS.PROJECTS
 </script>
 
 <template>
-  <section id="projects" class="section-container border-t border-white/5">
+  <section id="projects" class="section-container">
     <SectionHeader :label="header.label" :main="header.main" :secondary="header.secondary" :description="header.description" />
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5 auto-rows-fr">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
       <ProjectCard v-for="project in projectData" :key="project.id" :project="project" />
     </div>
   </section>

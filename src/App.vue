@@ -68,8 +68,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-zinc-950 selection:bg-emerald-500/30">
-    <div class="fixed top-0 left-0 h-1 bg-emerald-500 z-100 transition-all duration-100" :style="{ width: scrollPercent + '%' }"></div>
+  <div class="min-h-screen bg-base selection:bg-primary/20">
+    <div class="fixed top-0 left-0 h-1 bg-primary z-100 transition-all duration-100" :style="{ width: scrollPercent + '%' }"></div>
 
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
       <div class="grid-glow"></div>

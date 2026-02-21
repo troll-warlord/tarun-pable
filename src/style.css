@@ -1,312 +1,131 @@
 @import 'tailwindcss';
 
-/* 1. Global Reset & Base Styles */
+/* ============================================================
+   SECTION 1 — DESIGN TOKEN REGISTRY
+   @theme (static):  fonts, custom text-sizes, radii — build-time
+   @theme inline:    color aliases → runtime CSS vars — so Tailwind
+                     utilities like bg-surface / text-primary
+                     reference the live CSS variable at runtime.
+   ============================================================ */
+
+/* 1a. Static tokens — these values never change between themes */
+@theme {
+  /* Font stacks */
+  --font-sans: 'Inter', ui-sans-serif, system-ui;
+  --font-mono: 'Roboto Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Sub-xs type scale (fills the gap below Tailwind's text-xs=12px) */
+  --text-nano: 0.5625rem; /* 9px  — SVG / micro labels          */
+  --text-code: 0.625rem; /* 10px — mono badges, btn labels     */
+  --text-label: 0.6875rem; /* 11px — section labels, pill text   */
+
+  /* Semantic border-radius tokens */
+  --radius-card: 1rem; /* 16px — bento / main cards          */
+  --radius-badge: 0.25rem; /* 4px  — status badges, pills        */
+}
+
+/* 1b. Themeable color tokens — Tailwind reads these as utilities:
+        bg-primary, text-primary, border-primary,
+        bg-surface, bg-base, bg-panel, border-edge,
+        text-main, text-body, text-muted                          */
+@theme inline {
+  --color-primary: var(--clr-primary);
+  --color-primary-muted: var(--clr-primary-muted);
+  --color-primary-subtle: var(--clr-primary-subtle);
+
+  --color-base: var(--clr-bg-base);
+  --color-surface: var(--clr-bg-surface);
+  --color-panel: var(--clr-bg-panel);
+  --color-edge: var(--clr-edge);
+
+  --color-main: var(--clr-text-main);
+  --color-body: var(--clr-text-body);
+  --color-muted: var(--clr-text-muted);
+}
+
+/* ============================================================
+   SECTION 2 — THEME DEFINITIONS
+   :root      = Light theme (default / system fallback)
+   html.dark  = Dark theme  (active via class="dark" on <html>)
+   Dark is the visual default because index.html ships class="dark".
+   ============================================================ */
 @layer base {
   :root {
-    /* --- COLOR PALETTE (The Single Source of Truth) --- */
+    /* --- Accent --- */
+    --clr-primary: #047857; /* emerald-700 — richer, higher contrast on light bg */
+    --clr-primary-muted: rgba(4, 120, 87, 0.25);
+    --clr-primary-subtle: rgba(4, 120, 87, 0.08);
+    --clr-primary-dark: #064e3b;
 
-    /* The Main Accent (Was: Emerald-500) */
-    --primary: #10b981;
-    /* The Glow/Shadow color (Was: Emerald-500/50) */
-    --primary-glow: rgba(16, 185, 129, 0.5);
-    /* The Dark Button color (Was: Emerald-900) */
-    --primary-dark: #064e3b;
+    /* --- Backgrounds --- */
+    --clr-bg-base: #ebebef; /* cool light gray — clearly not white */
+    --clr-bg-surface: #dddde3; /* one step darker for cards/sections */
+    --clr-bg-panel: rgba(0, 0, 0, 0.05);
 
-    /* Backgrounds */
-    --bg-deep: #09090b; /* Was: Zinc-950 */
-    --bg-surface: #18181b; /* Was: Zinc-900 */
-    --bg-panel: rgba(255, 255, 255, 0.05); /* Was: white/5 */
+    /* --- Borders --- */
+    --clr-edge: #a1a1aa; /* zinc-400 — fully opaque, clearly visible */
+    --clr-grid: rgba(0, 0, 0, 0.07); /* very subtle grid lines for light bg */
 
-    /* Typography Colors */
-    --text-main: #f4f4f5; /* Was: Zinc-100 */
-    --text-body: #d4d4d8; /* Was: Zinc-300 */
-    --text-muted: #71717a; /* Was: Zinc-500 */
+    /* --- Typography --- */
+    --clr-text-main: #09090b; /* zinc-950 — near-black, max contrast */
+    --clr-text-body: #27272a; /* zinc-800 — strong readable body text */
+    --clr-text-muted: #52525b; /* zinc-600 — visible but recessed */
 
-    /* Interaction */
+    /* --- Computed shadows --- */
+    --shadow-glow: 0 0 12px var(--clr-primary-muted);
+    --shadow-glow-lg: 0 0 32px var(--clr-primary-muted);
+
+    /* --- Mouse tracking (interactive grid effect) --- */
     --mouse-x: 50%;
     --mouse-y: 50%;
   }
 
+  html.dark {
+    /* --- Accent --- */
+    --clr-primary: #10b981; /* emerald-500 */
+    --clr-primary-muted: rgba(16, 185, 129, 0.5);
+    --clr-primary-subtle: rgba(16, 185, 129, 0.08);
+    --clr-primary-dark: #064e3b;
+
+    /* --- Backgrounds --- */
+    --clr-bg-base: #09090b; /* zinc-950 */
+    --clr-bg-surface: #18181b; /* zinc-900 */
+    --clr-bg-panel: rgba(255, 255, 255, 0.05);
+
+    /* --- Borders --- */
+    --clr-edge: rgba(255, 255, 255, 0.08);
+    --clr-grid: rgba(255, 255, 255, 0.06); /* same subtle feel as before */
+
+    /* --- Typography --- */
+    --clr-text-main: #f4f4f5; /* zinc-100 */
+    --clr-text-body: #d4d4d8; /* zinc-300 */
+    --clr-text-muted: #71717a; /* zinc-500 */
+  }
+
   html {
-    /* using arbitrary values [...] lets us use our variables instantly */
-    @apply scroll-smooth selection:bg-[var(--primary)] selection:text-black;
+    @apply scroll-smooth;
+    /* Selection uses primary color and adapts per theme */
+    &::selection,
+    *::selection {
+      background-color: var(--clr-primary-subtle);
+      color: var(--clr-text-main);
+    }
   }
 
   body {
-    @apply bg-[var(--bg-deep)] text-[var(--text-body)] antialiased font-sans;
+    background-color: var(--clr-bg-base);
+    color: var(--clr-text-body);
+    @apply antialiased font-sans;
   }
 }
 
-/* 2. Semantic Component Classes (Your Design System) */
+/* ============================================================
+   SECTION 3 — GLOBAL COMPONENT CLASSES
+   Rule: Only classes used by 2+ components live here.
+   Single-component "skin" classes belong in <style scoped>.
+   ============================================================ */
 @layer components {
-  /* --- LAYOUT & CONTAINERS --- */
-  .section-container {
-    /* Use var(--bg-panel) for the subtle border */
-    @apply relative py-24 px-6 md:px-12 lg:px-24 border-t border-[var(--bg-panel)] overflow-hidden;
-  }
-
-  @media (min-width: 768px) {
-    .bg-grid {
-      @apply absolute inset-0;
-      /* Using var(--bg-panel) ensures grid lines match your border color */
-      background-image: linear-gradient(var(--bg-panel) 1px, transparent 1px), linear-gradient(90deg, var(--bg-panel) 1px, transparent 1px);
-      background-size: 20px 20px;
-
-      transition:
-        mask-image 0.3s ease,
-        -webkit-mask-image 0.3s ease;
-
-      mask-image: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), black 0%, rgba(0, 0, 0, 0.1) 100%);
-      -webkit-mask-image: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
-    }
-
-    .grid-glow {
-      @apply absolute inset-0;
-      /* We use color-mix to make the primary color very transparent (4%) for the glow */
-      background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), color-mix(in srgb, var(--primary), transparent 96%), transparent 100%);
-    }
-  }
-
-  /* Fallback for mobile */
-  @media (max-width: 767px) {
-    .bg-grid,
-    .grid-glow {
-      display: none;
-    }
-  }
-
-  /* --- TYPOGRAPHY HIERARCHY --- */
-  .heading-xl {
-    /* Changed text-zinc-100 -> text-[var(--text-main)] */
-    @apply font-sans font-black text-5xl md:text-7xl lg:text-8xl text-[var(--text-main)] uppercase tracking-tighter leading-[0.9];
-  }
-
-  .heading-lg {
-    /* Changed text-zinc-100 -> text-[var(--text-main)] */
-    @apply font-sans font-black text-2xl md:text-3xl text-[var(--text-main)] uppercase tracking-tighter leading-tight;
-  }
-
-  .text-mono-label {
-    /* Changed text-emerald-500/80 -> text-[var(--primary)] with opacity */
-    @apply font-mono text-[10px] md:text-[11px] font-bold tracking-[0.3em] uppercase text-[var(--primary)] opacity-90;
-  }
-
-  .text-body-muted {
-    /* Changed text-zinc-500 -> text-[var(--text-muted)] */
-    @apply text-[var(--text-muted)] text-sm md:text-base leading-relaxed font-medium italic transition-colors;
-  }
-
-  /* --- SHARED CARD ARCHITECTURE --- */
-  .infra-card {
-    /* bg-transparent ensures it doesn't clash with the global background */
-    @apply relative flex flex-col px-8 py-10 transition-all duration-500 border-l border-[var(--bg-panel)] bg-transparent;
-  }
-
-  .infra-card:hover {
-    /* We use color-mix to create a faint primary background on hover (2% opacity) */
-    border-color: var(--primary);
-    background-color: color-mix(in srgb, var(--primary), transparent 98%);
-  }
-
-  /* --- UI ELEMENTS --- */
-  .status-node {
-    /* The circular status indicator */
-    @apply w-2 h-2 rounded-full border transition-all duration-500;
-  }
-
-  .status-node-active {
-    /* Uses --primary and --primary-glow for that "pulsing" server look */
-    @apply bg-[var(--primary)] border-[var(--primary)] shadow-[0_0_12px_var(--primary-glow)];
-  }
-
-  .status-node-pending {
-    @apply bg-[var(--bg-surface)] border-[var(--bg-panel)];
-  }
-
-  .tech-icon-wrapper {
-    @apply w-10 h-10 rounded-sm bg-[var(--bg-surface)] border border-[var(--bg-panel)] p-2 flex items-center justify-center transition-all duration-500;
-  }
-
-  .btn-primary {
-    /* Uses --primary-dark for the button and --text-main for the font */
-    @apply px-6 py-3 bg-[var(--primary-dark)]/60 text-[var(--text-main)] font-mono text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-[var(--primary-dark)] transition-all;
-    border: 1px solid var(--primary);
-  }
-
-  .btn-outline {
-    @apply px-6 py-3 border border-[var(--bg-panel)] text-[var(--text-muted)] font-mono text-[10px] font-bold uppercase tracking-[0.2em] hover:text-[var(--text-main)] hover:bg-[var(--bg-panel)] transition-all;
-  }
-
-  /* Experience Log Entry */
-  .log-entry {
-    @apply relative pl-6 py-4 border-l-2 transition-colors rounded-r-sm;
-    border-color: color-mix(in srgb, var(--primary), transparent 90%);
-    background-color: var(--bg-panel);
-  }
-  .log-entry:hover {
-    border-color: var(--primary);
-  }
-
-  /* Compact Tech Grid Item */
-  .tech-pill {
-    @apply flex items-center gap-3 px-4 py-2 border rounded-sm transition-all;
-    background-color: var(--bg-surface);
-    border-color: var(--bg-panel);
-  }
-  .tech-pill:hover {
-    border-color: color-mix(in srgb, var(--primary), transparent 70%);
-  }
-
-  .section-label {
-    @apply font-mono text-[10px] md:text-[11px] font-bold uppercase mb-2 opacity-60 tracking-widest;
-    color: var(--text-muted);
-  }
-
-  .section-heading {
-    @apply font-sans font-black text-3xl md:text-6xl uppercase tracking-tighter leading-[0.9] mb-6;
-    color: var(--text-main);
-  }
-  /* The Container for the "Pipe + Text" combo */
-  .pipe-description {
-    @apply flex items-start gap-4 max-w-2xl;
-  }
-
-  /* The vertical line itself */
-  .pipe-line {
-    @apply w-px h-full min-h-12 bg-emerald-500/40 mt-1.5 shrink-0;
-  }
-
-  /* The text next to the pipe */
-  .description-text {
-    @apply text-zinc-500 text-base md:text-lg leading-relaxed font-medium italic transition-colors opacity-80;
-  }
-
-  .contact-input {
-    @apply w-full bg-zinc-950 border border-white/5 px-4 py-4 text-zinc-300 font-mono text-xs focus:border-emerald-500/50 focus:outline-none transition-all placeholder:text-zinc-800;
-  }
-
-  .bento-box-base {
-    @apply p-8 rounded-2xl border border-white/5 bg-zinc-900/20 flex flex-col items-start justify-between transition-all duration-500;
-  }
-
-  .bento-label-base {
-    @apply w-full font-mono text-[12px] uppercase tracking-[0.4em] text-zinc-600 mb-2 transition-colors;
-  }
-
-  .tech-item-base {
-    @apply relative flex flex-col items-center justify-center transition-all duration-300;
-    /* Added these for better mobile visibility */
-  }
-
-  .tech-icon-base {
-    @apply w-12 h-12 md:w-16 md:h-16 object-contain brightness-110 contrast-125;
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.4));
-  }
-
-  /* --- 3. EXPERIENCE SECTION ADDITIONS (New Functionality) --- */
-
-  /* Log Entry specifically for the internal scroll list */
-  .exp-log-item {
-    @apply relative pl-6 py-4 border-l-2 border-emerald-500/10 hover:border-emerald-500 transition-colors bg-white/2 rounded-r-sm;
-    will-change: transform, opacity;
-  }
-
-  /* Custom Scrollbar for the Impact Log area */
-  .custom-log-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--primary), transparent 70%) transparent;
-  }
-
-  .custom-log-scrollbar::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  .custom-log-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .custom-log-scrollbar::-webkit-scrollbar-thumb {
-    @apply bg-emerald-500/20 rounded-full;
-  }
-
-  .custom-log-scrollbar::-webkit-scrollbar-thumb:hover {
-    @apply bg-emerald-500/50;
-  }
-
-  /* Fade Mask for Top/Bottom of Log Area */
-  .log-scroll-mask {
-    mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
-  }
-
-  /* --- 4. ABOUT SECTION & CONSOLE (REFINED) --- */
-
-  .console-wrapper {
-    @apply flex flex-row lg:flex-row gap-0 lg:gap-8 h-[550px] md:h-[500px] border rounded-xl overflow-hidden;
-    border-color: var(--bg-panel);
-    background-color: color-mix(in srgb, var(--bg-surface), transparent 90%);
-  }
-
-  .console-sidebar {
-    @apply order-2 lg:order-1 w-[40%] lg:w-72 border-l lg:border-l-0 lg:border-r flex flex-col;
-    border-color: var(--bg-panel);
-    background-color: color-mix(in srgb, var(--bg-surface), transparent 70%);
-  }
-
-  .console-viewport {
-    /* Mobile: Left (order-1), Laptop: Right (order-2) */
-    @apply order-1 lg:order-2 flex-grow relative bg-zinc-900/20 lg:bg-transparent overflow-hidden flex flex-col;
-  }
-
-  /* New shared header style for both columns */
-  .console-header-area {
-    @apply p-4 lg:p-6 border-b border-white/5 bg-zinc-950/20 lg:bg-transparent shrink-0;
-  }
-
-  .console-label {
-    @apply font-mono text-[9px] lg:text-[10px] uppercase tracking-[0.3em] transition-colors;
-  }
-
-  .console-btn {
-    /* Consistent text alignment and padding */
-    @apply w-full text-right lg:text-left px-4 py-5 lg:py-4 font-mono text-[10px] lg:text-[11px] uppercase tracking-widest transition-all border-white/5 rounded-sm text-zinc-500 hover:text-zinc-200 hover:bg-white/5 cursor-pointer outline-none;
-  }
-
-  .console-btn-active {
-    @apply text-[var(--primary)] border-r-2 border-l-0 md:border-r-0 md:border-l-2;
-    border-color: var(--primary);
-    background-color: color-mix(in srgb, var(--primary), transparent 90%);
-  }
-
-  .console-card {
-    @apply flex items-center gap-4 lg:flex-col lg:justify-center lg:items-center p-3 lg:p-6 border rounded-md transition-all duration-300;
-    border-color: var(--bg-panel);
-    background-color: color-mix(in srgb, var(--bg-deep), transparent 60%);
-  }
-  .console-card:hover {
-    border-color: color-mix(in srgb, var(--primary), transparent 70%);
-  }
-
-  /* Ensure icons don't dominate the screen on mobile vertical list */
-  /* .tech-icon-base {
-  @apply w-10 h-10 lg:w-16 lg:h-16 object-contain grayscale group-hover:grayscale-0 transition-all duration-500;
-} */
-
-  /* Transitions */
-  .fade-slide-enter-active,
-  .fade-slide-leave-active {
-    transition: all 0.2s ease-out;
-  }
-  .fade-slide-enter-from {
-    opacity: 0;
-    transform: translateX(-8px);
-  }
-  .fade-slide-leave-to {
-    opacity: 0;
-    transform: translateX(8px);
-  }
-
-  /* Inter */
+  /* ── Font Loading ────────────────────────────────────────── */
   @font-face {
     font-family: 'Inter';
     font-style: normal;
@@ -335,8 +154,6 @@
     font-display: swap;
     src: url('/fonts/inter-700.woff2') format('woff2');
   }
-
-  /* Roboto Mono */
   @font-face {
     font-family: 'Roboto Mono';
     font-style: normal;
@@ -350,5 +167,179 @@
     font-weight: 500;
     font-display: swap;
     src: url('/fonts/roboto-500.woff2') format('woff2');
+  }
+
+  /* ── Layout & Containers ─────────────────────────────────── */
+  .section-container {
+    @apply relative py-24 px-6 md:px-12 lg:px-24 overflow-hidden min-h-screen;
+    border-top: 1px solid var(--clr-edge);
+  }
+
+  /* Interactive cursor-tracked grid overlay (App.vue) */
+  @media (min-width: 768px) {
+    .bg-grid {
+      @apply absolute inset-0;
+      background-image: linear-gradient(var(--clr-grid) 1px, transparent 1px), linear-gradient(90deg, var(--clr-grid) 1px, transparent 1px);
+      background-size: 20px 20px;
+      transition:
+        mask-image 0.3s ease,
+        -webkit-mask-image 0.3s ease;
+      mask-image: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), black 0%, rgba(0, 0, 0, 0.1) 100%);
+      -webkit-mask-image: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), black 0%, transparent 100%);
+    }
+
+    .grid-glow {
+      @apply absolute inset-0;
+      background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), color-mix(in srgb, var(--clr-primary), transparent 96%), transparent 100%);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .bg-grid,
+    .grid-glow {
+      display: none;
+    }
+  }
+
+  /* ── Typography Hierarchy ────────────────────────────────── */
+  .heading-xl {
+    @apply font-sans font-black text-5xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[0.9];
+    color: var(--clr-text-main);
+  }
+
+  .heading-lg {
+    @apply font-sans font-black text-2xl md:text-3xl uppercase tracking-tighter leading-tight;
+    color: var(--clr-text-main);
+  }
+
+  /* Mono accent label (e.g. "// INIT_PROCESS") */
+  .text-mono-label {
+    @apply font-mono text-code md:text-label font-bold tracking-[0.3em] uppercase opacity-90;
+    color: var(--clr-primary);
+  }
+
+  /* Italic muted body copy */
+  .text-body-muted {
+    @apply text-sm md:text-base leading-relaxed font-medium italic transition-colors;
+    color: var(--clr-text-muted);
+  }
+
+  /* Section header pair */
+  .section-label {
+    @apply font-mono text-code md:text-label font-bold uppercase mb-2 opacity-60 tracking-widest;
+    color: var(--clr-text-muted);
+  }
+
+  .section-heading {
+    @apply font-sans font-black text-3xl md:text-6xl uppercase tracking-tighter leading-[0.9] mb-6;
+    color: var(--clr-text-main);
+  }
+
+  /* Pipe + description layout (SectionHeader.vue) */
+  .pipe-description {
+    @apply flex items-start gap-4 max-w-2xl;
+  }
+
+  .pipe-line {
+    @apply w-px h-full min-h-12 mt-1.5 shrink-0;
+    background-color: color-mix(in srgb, var(--clr-primary), transparent 60%);
+  }
+
+  .description-text {
+    @apply text-base md:text-lg leading-relaxed font-medium italic transition-colors opacity-80;
+    color: var(--clr-text-muted);
+  }
+
+  /* ── Shared Card Architecture ────────────────────────────── */
+  /* Used by CertificationCard and any future infra-style card */
+  .infra-card {
+    @apply relative flex flex-col px-8 py-10 transition-all duration-500 bg-transparent;
+    border-left: 1px solid var(--clr-edge);
+  }
+
+  .infra-card:hover {
+    border-color: var(--clr-primary);
+    background-color: color-mix(in srgb, var(--clr-primary), transparent 98%);
+  }
+
+  /* Compact tech grid item (used in Projects, About) */
+  .tech-pill {
+    @apply flex items-center gap-3 px-4 py-2 border rounded-badge transition-all;
+    background-color: var(--clr-bg-surface);
+    border-color: var(--clr-edge);
+  }
+  .tech-pill:hover {
+    border-color: color-mix(in srgb, var(--clr-primary), transparent 70%);
+  }
+
+  /* Log entry row (used in Experience, etc.) */
+  .log-entry {
+    @apply relative pl-6 py-4 border-l-2 transition-colors rounded-r-badge;
+    border-color: color-mix(in srgb, var(--clr-primary), transparent 90%);
+    background-color: var(--clr-bg-panel);
+  }
+  .log-entry:hover {
+    border-color: var(--clr-primary);
+  }
+
+  /* ── UI Elements ─────────────────────────────────────────── */
+  /* Circular status dot */
+  .status-node {
+    @apply w-2 h-2 rounded-full border transition-all duration-500;
+  }
+  .status-node-active {
+    background-color: var(--clr-primary);
+    border-color: var(--clr-primary);
+    box-shadow: var(--shadow-glow);
+  }
+  .status-node-pending {
+    background-color: var(--clr-bg-surface);
+    border-color: var(--clr-edge);
+  }
+
+  .tech-icon-wrapper {
+    @apply w-10 h-10 rounded-badge p-2 flex items-center justify-center transition-all duration-500;
+    background-color: var(--clr-bg-surface);
+    border: 1px solid var(--clr-edge);
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    @apply px-6 py-3 font-mono text-code font-bold uppercase tracking-[0.2em] transition-all;
+    background-color: color-mix(in srgb, var(--clr-primary-dark, #064e3b), transparent 40%);
+    color: var(--clr-text-main);
+    border: 1px solid var(--clr-primary);
+
+    &:hover {
+      background-color: var(--clr-primary-dark, #064e3b);
+    }
+  }
+
+  /* Secondary / ghost button */
+  .btn-outline {
+    @apply px-6 py-3 font-mono text-code font-bold uppercase tracking-[0.2em] transition-all;
+    border: 1px solid var(--clr-edge);
+    color: var(--clr-text-muted);
+
+    &:hover {
+      color: var(--clr-text-main);
+      background-color: var(--clr-bg-panel);
+    }
+  }
+
+  /* Form input (InfraInput.vue) */
+  .contact-input {
+    @apply w-full px-4 py-4 font-mono text-xs focus:outline-none transition-all;
+    background-color: var(--clr-bg-base);
+    border: 1px solid var(--clr-edge);
+    color: var(--clr-text-body);
+
+    &::placeholder {
+      color: var(--clr-text-muted);
+      opacity: 0.4;
+    }
+    &:focus {
+      border-color: color-mix(in srgb, var(--clr-primary), transparent 50%);
+    }
   }
 }

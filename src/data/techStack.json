@@ -15,79 +15,115 @@
       "status": "Active"
     }
   ],
-  "cloud_platforms": [
-    { "name": "AWS", "slug": "aws-light" },
-    { "name": "Azure", "slug": "azure" },
-    { "name": "GCP", "slug": "google-cloud" }
-  ],
-  "orchestration_logic": [
-    { "name": "Kubernetes", "slug": "kubernetes-light" },
-    { "name": "Helm", "slug": "helm" },
-    { "name": "Docker", "slug": "docker" },
-    { "name": "ArgoCD", "slug": "argo-cd" }
-  ],
-  "automation_iac": [
-    { "name": "Terraform", "slug": "terraform" },
-    { "name": "Pulumi", "slug": "pulumi" },
-    { "name": "Packer", "slug": "packer" },
-    { "name": "Ansible", "slug": "ansible" },
-    { "name": "Vagrant", "slug": "vagrant" }
-  ],
-  "development_languages": [
-    { "name": "Python", "slug": "python" },
-    { "name": "Go", "slug": "go" },
-    { "name": "Java", "slug": "java" },
-    { "name": "PHP", "slug": "php" },
-    { "name": "Bash", "slug": "bash" }
-  ],
-  "scripting": [
-    { "name": "Bash", "slug": "bash" },
-    { "name": "Python", "slug": "python" },
-    { "name": "PowerShell", "slug": "powershell" }
-  ],
-  "version_control": [
-    { "name": "Git", "slug": "git" },
-    { "name": "GitHub", "slug": "github-light" },
-    { "name": "GitLab", "slug": "gitlab" },
-    { "name": "Bitbucket", "slug": "bitbucket" }
-  ],
-  "ci_cd_pipelines": [
-    { "name": "GitHub Actions", "slug": "github-actions" },
-    { "name": "Azure Pipelines", "slug": "azure-devops" },
-    { "name": "GitLab CI", "slug": "gitlab" }
-  ],
-  "frontend_stack": [
-    { "name": "Vue.js", "slug": "vue-js" },
-    { "name": "Tailwind", "slug": "tailwind-css" },
-    { "name": "HTML5", "slug": "html" },
-    { "name": "CSS3", "slug": "css" },
-    { "name": "JavaScript", "slug": "javascript" },
-    { "name": "Bootstrap", "slug": "bootstrap" }
-  ],
-  "persistent_storage": [
-    { "name": "PostgreSQL", "slug": "postgresql" },
-    { "name": "MySQL", "slug": "mysql" },
-    { "name": "MongoDB", "slug": "mongodb" },
-    {"name": "Redis", "slug": "redis" }
-  ],
-  "telemetry_observability": [
-    { "name": "Prometheus", "slug": "prometheus" },
-    { "name": "Grafana", "slug": "grafana" },
-    { "name": "Splunk", "slug": "splunk-light" },
-    { "name": "Fluentd", "slug": "fluentd" },
-    { "name": "Fluent Bit", "slug": "fluentbit" },
-    { "name": "Elastic Search", "slug": "elastic-search" }
-  ],
-  "quality_assurance": [
-    { "name": "Selenium", "slug": "selenium" },
-    { "name": "JMeter", "slug": "jmeter" }
-  ],
-  "others": [
-    { "name": "Linux", "slug": "linux" },
-    { "name": "Nginx", "slug": "nginx-light" },
-    { "name": "Rabbit MQ", "slug": "rabbit-mq" },
-    { "name": "Apache Kafka", "slug": "apache-kafka" },
-    { "name": "Jira", "slug": "jira" },
-    { "name": "Confluence", "slug": "confluence" }
-  ]
+  "cloud_platforms": {
+    "label": "Cloud_Ops",
+    "items": [
+      { "name": "AWS", "slug": "aws-light" },
+      { "name": "Azure", "slug": "azure" },
+      { "name": "GCP", "slug": "google-cloud" }
+    ]
+  },
+  "orchestration_logic": {
+    "label": "Clusters",
+    "items": [
+      { "name": "Kubernetes", "slug": "kubernetes-light" },
+      { "name": "Helm", "slug": "helm" },
+      { "name": "Docker", "slug": "docker" },
+      { "name": "ArgoCD", "slug": "argo-cd" }
+    ]
+  },
+  "automation_iac": {
+    "label": "IaC",
+    "items": [
+      { "name": "Terraform", "slug": "terraform" },
+      { "name": "Pulumi", "slug": "pulumi" },
+      { "name": "Packer", "slug": "packer" },
+      { "name": "Ansible", "slug": "ansible" },
+      { "name": "Vagrant", "slug": "vagrant" }
+    ]
+  },
+  "development_languages": {
+    "label": "Code",
+    "items": [
+      { "name": "Python", "slug": "python" },
+      { "name": "Go", "slug": "go" },
+      { "name": "Java", "slug": "java" },
+      { "name": "PHP", "slug": "php" },
+      { "name": "Bash", "slug": "bash" }
+    ]
+  },
+  "scripting": {
+    "label": "Scripting",
+    "items": [
+      { "name": "Bash", "slug": "bash" },
+      { "name": "Python", "slug": "python" },
+      { "name": "PowerShell", "slug": "powershell" }
+    ]
+  },
+  "version_control": {
+    "label": "Version_Ctrl",
+    "items": [
+      { "name": "Git", "slug": "git" },
+      { "name": "GitHub", "slug": "github-light" },
+      { "name": "GitLab", "slug": "gitlab" },
+      { "name": "Bitbucket", "slug": "bitbucket" }
+    ]
+  },
+  "ci_cd_pipelines": {
+    "label": "CI/CD",
+    "items": [
+      { "name": "GitHub Actions", "slug": "github-actions" },
+      { "name": "Azure Pipelines", "slug": "azure-devops" },
+      { "name": "GitLab CI", "slug": "gitlab" }
+    ]
+  },
+  "frontend_stack": {
+    "label": "Frontend",
+    "items": [
+      { "name": "Vue.js", "slug": "vue-js" },
+      { "name": "Tailwind", "slug": "tailwind-css" },
+      { "name": "HTML5", "slug": "html" },
+      { "name": "CSS3", "slug": "css" },
+      { "name": "JavaScript", "slug": "javascript" },
+      { "name": "Bootstrap", "slug": "bootstrap" }
+    ]
+  },
+  "persistent_storage": {
+    "label": "Data",
+    "items": [
+      { "name": "PostgreSQL", "slug": "postgresql" },
+      { "name": "MySQL", "slug": "mysql" },
+      { "name": "MongoDB", "slug": "mongodb" },
+      { "name": "Redis", "slug": "redis" }
+    ]
+  },
+  "telemetry_observability": {
+    "label": "Metrics",
+    "items": [
+      { "name": "Prometheus", "slug": "prometheus" },
+      { "name": "Grafana", "slug": "grafana" },
+      { "name": "Splunk", "slug": "splunk-light" },
+      { "name": "Fluentd", "slug": "fluentd" },
+      { "name": "Fluent Bit", "slug": "fluentbit" },
+      { "name": "Elastic Search", "slug": "elastic-search" }
+    ]
+  },
+  "quality_assurance": {
+    "label": "QA",
+    "items": [
+      { "name": "Selenium", "slug": "selenium" },
+      { "name": "JMeter", "slug": "jmeter" }
+    ]
+  },
+  "others": {
+    "label": "Tools",
+    "items": [
+      { "name": "Linux", "slug": "linux" },
+      { "name": "Nginx", "slug": "nginx-light" },
+      { "name": "Rabbit MQ", "slug": "rabbit-mq" },
+      { "name": "Apache Kafka", "slug": "apache-kafka" },
+      { "name": "Jira", "slug": "jira" },
+      { "name": "Confluence", "slug": "confluence" }
+    ]
+  }
 }

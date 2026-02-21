@@ -29,10 +29,10 @@ onMounted(() => {
     <SectionHeader :label="header.label" :main="header.main" :secondary="header.secondary" :description="header.description" />
 
     <div class="grid grid-cols-1 md:grid-cols-12 auto-rows-[300px] gap-4">
-      <div v-for="photo in photographyData" :key="photo.id" :class="['photo-card relative group overflow-hidden border border-white/5 rounded-sm', photo.span]">
-        <div class="absolute inset-0 bg-zinc-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex flex-col justify-end p-6">
-          <p class="text-mono-label text-emerald-500 mb-1">{{ photo.category }}</p>
-          <h4 class="text-xl font-bold text-white uppercase tracking-tighter">{{ photo.title }}</h4>
+      <div v-for="photo in photographyData" :key="photo.id" :class="['photo-node relative group overflow-hidden border border-edge rounded-sm', photo.span]">
+        <div class="absolute inset-0 bg-base/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 flex flex-col justify-end p-6">
+          <p class="text-mono-label text-primary mb-1">{{ photo.category }}</p>
+          <h4 class="text-xl font-bold text-main uppercase tracking-tighter">{{ photo.title }}</h4>
         </div>
 
         <img :src="photo.url" :alt="photo.title" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
@@ -42,19 +42,19 @@ onMounted(() => {
         ></div>
       </div>
     </div>
-    <div class="mt-12 flex flex-col md:flex-row items-center justify-between border-t border-white/5 pt-8 gap-6">
+    <div class="mt-12 flex flex-col md:flex-row items-center justify-between border-t border-edge pt-8 gap-6">
       <div class="flex gap-12">
         <div class="flex flex-col">
-          <span class="section-label mb-1! text-zinc-600">Optical_Resolution</span>
-          <span class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest">RAW_UNCOMPRESSED</span>
+          <span class="section-label mb-1! text-muted">Optical_Resolution</span>
+          <span class="text-code font-mono font-bold text-body uppercase tracking-widest">RAW_UNCOMPRESSED</span>
         </div>
         <div class="flex flex-col">
-          <span class="section-label mb-1! text-zinc-600">Sensor_Profile</span>
-          <span class="text-[10px] font-mono font-bold text-zinc-400 uppercase tracking-widest">Full_Frame_Dynamic</span>
+          <span class="section-label mb-1! text-muted">Sensor_Profile</span>
+          <span class="text-code font-mono font-bold text-body uppercase tracking-widest">Full_Frame_Dynamic</span>
         </div>
       </div>
-      <button class="section-label text-emerald-500 hover:text-emerald-400 transition-all group flex items-center gap-4 lowercase">
-        <span class="h-px w-8 bg-emerald-500/20 group-hover:w-12 group-hover:bg-emerald-500 transition-all"></span>
+      <button class="section-label text-primary hover:text-primary/70 transition-all group flex items-center gap-4 lowercase">
+        <span class="h-px w-8 bg-primary/20 group-hover:w-12 group-hover:bg-primary transition-all"></span>
         <span class="uppercase tracking-widest">ACCESS_FULL_GALLERY</span>
       </button>
     </div>
