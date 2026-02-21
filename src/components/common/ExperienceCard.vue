@@ -1,7 +1,16 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import TechIcon from '@/components/common/TechIcon.vue'
-defineProps({ job: Object })
+const props = defineProps({ job: Object })
+
+const period = computed(() => {
+  const fmt = (d) => {
+    if (!d || d === 'current') return 'Present'
+    const [year, month] = d.split('-')
+    return new Date(Number(year), Number(month) - 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+  }
+  return `${fmt(props.job.from)} – ${fmt(props.job.to)}`
+})
 
 const isExpanded = ref(false)
 const isIntersecting = ref(false) // Track mobile visibility
@@ -52,7 +61,7 @@ onMounted(() => {
             <span class="text-primary/50 font-mono text-sm font-bold uppercase">[Node]</span>
             <p class="text-mono-label text-muted text-xs uppercase">{{ job.role }}</p>
           </div>
-          <p class="text-label font-mono text-muted mt-1 uppercase tracking-widest">{{ job.period }}</p>
+          <p class="text-label font-mono text-muted mt-1 uppercase tracking-widest">{{ period }}</p>
         </div>
       </div>
 
