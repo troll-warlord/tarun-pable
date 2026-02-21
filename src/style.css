@@ -154,6 +154,13 @@
     font-display: swap;
     src: url('/fonts/inter-v20-latin-700.woff2') format('woff2');
   }
+   @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url('/fonts/inter-v20-latin-900.woff2') format('woff2');
+  }
   @font-face {
     font-family: 'Roboto Mono';
     font-style: normal;
