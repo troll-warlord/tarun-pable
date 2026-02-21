@@ -1,13 +1,28 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import TechIcon from './TechIcon.vue'
 const props = defineProps({ project: { type: Object, required: true } })
 
 const isLive = computed(() => props.project.status === 'live')
+
+const cardRef = ref(null)
+const isIntersecting = ref(false)
+
+onMounted(() => {
+  if (window.innerWidth < 768) {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting.value = entry.isIntersecting
+      },
+      { threshold: 0.6 }
+    )
+    if (cardRef.value) observer.observe(cardRef.value)
+  }
+})
 </script>
 
 <template>
-  <div class="group relative p-8 md:p-10 h-full flex flex-col project-card">
+  <div ref="cardRef" :class="['group relative p-8 md:p-10 h-full flex flex-col project-card', isIntersecting ? 'border-primary/40' : 'border-edge md:hover:border-primary/30']">
     <!-- Header row: deployment ref + status badge -->
     <div class="relative z-10 flex justify-between items-start mb-10 pl-2">
       <div class="flex flex-col gap-1.5">
@@ -88,7 +103,6 @@ const isLive = computed(() => props.project.status === 'live')
 @reference "tailwindcss";
 .project-card {
   @apply relative flex flex-col border rounded-md transition-all duration-300;
-  border-color: var(--clr-edge);
   background-color: color-mix(in srgb, var(--clr-bg-base), transparent 60%);
 
   &:hover {

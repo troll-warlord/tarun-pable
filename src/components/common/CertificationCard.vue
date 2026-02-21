@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="infra-card cert-card group flex flex-row items-stretch p-0 overflow-hidden min-h-40">
+  <div class="cert-card group flex flex-row items-stretch p-0 overflow-hidden min-h-40">
     <!-- Logo column -->
     <div class="w-28 md:w-32 shrink-0 flex items-center justify-center bg-panel group-hover:bg-primary-subtle transition-colors">
       <TechIcon :slug="cert.slug" :alt="cert.name" />
@@ -46,15 +46,14 @@ defineProps({
 
 <style scoped>
 @reference "tailwindcss";
-
-/* The .infra-card global class provides the base border + hover behavior.
-   .cert-card overrides only what's structural to this component. */
 .cert-card {
-  background-color: color-mix(in srgb, var(--clr-bg-surface), transparent 80%);
+  @apply relative transition-all duration-500;
+  background-color: color-mix(in srgb, var(--clr-bg-base), transparent 60%);
   border: 1px solid var(--clr-edge);
 
-  /* infra-card has border-l, we restore all-sides border for this card layout */
-  border-left-width: 1px;
+  &:hover {
+    border-color: color-mix(in srgb, var(--clr-primary), transparent 70%);
+  }
 }
 
 /* Status pill (ACTIVE / IN_PROGRESS / etc.) */
