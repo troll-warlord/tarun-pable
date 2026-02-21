@@ -52,7 +52,7 @@ const handleCommit = () => {
         </p>
       </div>
 
-      <div class="form-card">
+      <div id="contact-form" class="form-card" style="scroll-margin-top: 64px">
         <form class="space-y-8" @submit.prevent="handleCommit">
           <div class="grid md:grid-cols-2 gap-8">
             <InfraInput v-model="form.name" label="01 // IDENTIFY_NAME" placeholder="USER_ID" required />

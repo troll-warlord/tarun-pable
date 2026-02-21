@@ -13,7 +13,10 @@ onMounted(() => {
   tl.from('.hero-text', { y: 20, opacity: 0, duration: 1, ease: 'power3.out' }).from('.metric-card', { scale: 0.95, opacity: 0, stagger: 0.1, duration: 0.8 }, '-=0.5')
 })
 
-const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+const scrollTo = (id) => {
+  const targetId = id === 'contact' && window.innerWidth < 768 ? 'contact-form' : id
+  document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <template>

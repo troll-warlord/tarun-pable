@@ -42,7 +42,10 @@ onUnmounted(() => {
   mm.revert()
 })
 
-const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+const scrollTo = (id) => {
+  const targetId = id === 'contact' && window.innerWidth < 768 ? 'contact-form' : id
+  document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <template>
@@ -70,7 +73,7 @@ const scrollToContact = () => document.getElementById('contact')?.scrollIntoView
             <span class="text-mono-label text-primary absolute -top-3 left-6 bg-base px-3">EOF</span>
             <h4 class="text-xl md:text-2xl font-bold mb-4 uppercase text-main">Next_Major_Release?</h4>
             <p class="text-muted text-sm mb-8 italic">Currently seeking opportunities to architect high-availability systems and lead engineering excellence.</p>
-            <button class="btn-primary w-full" @click="scrollToContact">Establish_Connection</button>
+            <button class="btn-primary w-full" @click="scrollTo('contact')">Establish_Connection</button>
           </div>
         </div>
       </div>
