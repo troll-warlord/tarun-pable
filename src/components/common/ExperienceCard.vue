@@ -44,7 +44,7 @@ onMounted(() => {
         'w-3 h-3 rounded-full border-2 border-base bg-surface absolute z-70 transition-all duration-500',
         'left-0 -translate-x-1/2 top-0 md:top-0',
         'md:left-0 md:-translate-y-1/2',
-        isExpanded ? 'bg-primary border-primary scale-125 [box-shadow:var(--shadow-glow)]' : 'group-hover:border-primary/50',
+        isExpanded ? 'bg-primary border-primary scale-125 [box-shadow:var(--shadow-glow)]' : isIntersecting ? 'border-primary/40' : 'group-hover:border-primary/50',
       ]"
     ></div>
 
