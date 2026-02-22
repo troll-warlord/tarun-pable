@@ -1,6 +1,12 @@
 <script setup>
-defineProps({
+const props = defineProps({
   title: String,
+  /** Explicit height for the content area, e.g. "140px". When set the slot
+   *  content is clipped and never causes the box to grow. */
+  contentHeight: {
+    type: String,
+    default: null,
+  },
 })
 </script>
 
@@ -14,7 +20,7 @@ defineProps({
       </div>
       <span v-if="title" class="console-title">{{ title }}</span>
     </div>
-    <div class="console-content text-sm">
+    <div class="console-content text-sm" :style="props.contentHeight ? { height: props.contentHeight, overflow: 'hidden' } : {}">
       <slot />
     </div>
   </div>
@@ -26,6 +32,8 @@ defineProps({
   border: 1px solid var(--clr-edge);
   padding: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  /* height is intentionally auto — pass h-full class if you need full-height */
 }
 .console-header {
   display: flex;
@@ -62,6 +70,7 @@ defineProps({
 }
 .console-content {
   font-family: var(--font-mono);
+  font-size: var(--text-code, 10px);
   color: var(--clr-text-muted);
 }
 </style>

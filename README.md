@@ -12,7 +12,7 @@ A high-performance, terminal-aesthetic developer portfolio built with Vue 3, Tai
 ## Tech Stack
 
 | Layer | Technology |
-|---|---|
+| --- | --- |
 | Framework | Vue 3 (Composition API, `<script setup>`) |
 | Build Tool | Vite 6 |
 | Styling | Tailwind CSS v4 (CSS-first `@theme`) |
@@ -25,58 +25,13 @@ A high-performance, terminal-aesthetic developer portfolio built with Vue 3, Tai
 
 ---
 
-## Project Structure
-
-```
-src/
-├── assets/
-│   ├── icons/          # Tech stack SVG icons
-│   └── img/
-├── components/
-│   ├── common/         # Reusable UI components
-│   │   ├── BentoBox.vue
-│   │   ├── CertificationCard.vue
-│   │   ├── ExperienceCard.vue
-│   │   ├── InfraInput.vue
-│   │   ├── ProjectCard.vue
-│   │   ├── SectionHeader.vue
-│   │   ├── TechBadge.vue
-│   │   ├── TechConsole.vue
-│   │   ├── TechIcon.vue
-│   │   └── TerminalWindow.vue
-│   ├── layout/
-│   │   ├── Footer.vue
-│   │   └── Navbar.vue
-│   └── sections/
-│       ├── About.vue
-│       ├── Contact.vue
-│       ├── Experience.vue
-│       ├── Hero.vue
-│       ├── Photography.vue
-│       └── Projects.vue
-├── data/               # JSON data sources (single source of truth)
-│   ├── experience.json
-│   ├── footer.json
-│   ├── hero.json
-│   ├── photography.json
-│   ├── projects.json
-│   └── techStack.json
-├── router/index.js
-├── stores/theme.js     # Pinia theme store (dark/light + localStorage)
-├── utils/constants.js  # Section header copy
-├── style.css           # Design token registry + global classes
-└── App.vue
-```
-
----
-
 ## Design System
 
 All design tokens live in `src/style.css` as a single source of truth.
 
 ### CSS Architecture
 
-```
+```bash
 @theme            → Static build-time tokens (fonts, custom type scale, radii)
 @theme inline     → Runtime color aliases mapping Tailwind utilities to CSS vars
 @layer base       → :root (light) + html.dark (dark) theme definitions
@@ -87,10 +42,10 @@ All design tokens live in `src/style.css` as a single source of truth.
 ### Color Tokens
 
 | Token | Light | Dark | Usage |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `--clr-primary` | `#047857` emerald-700 | `#10b981` emerald-500 | Accent, CTAs |
-| `--clr-bg-base` | `#ebebef` cool gray | `#09090b` zinc-950 | Page background |
-| `--clr-bg-surface` | `#dddde3` | `#18181b` zinc-900 | Cards, panels |
+| `--clr-bg-base` | `#d4d4d8` zinc-300 | `#09090b` zinc-950 | Page background |
+| `--clr-bg-surface` | `#c8c8ce` | `#18181b` zinc-900 | Cards, panels |
 | `--clr-edge` | `#a1a1aa` zinc-400 | `rgba(255,255,255,0.08)` | Borders |
 | `--clr-text-main` | `#09090b` zinc-950 | `#f4f4f5` zinc-100 | Headings |
 | `--clr-text-body` | `#27272a` zinc-800 | `#d4d4d8` zinc-300 | Body copy |
@@ -99,7 +54,7 @@ All design tokens live in `src/style.css` as a single source of truth.
 ### Custom Type Scale
 
 | Token | Size | Usage |
-|---|---|---|
+| --- | --- | --- |
 | `--text-nano` | 9px | SVG labels, micro text |
 | `--text-code` | 10px | Mono badges, button labels |
 | `--text-label` | 11px | Section labels, pill text |
@@ -130,7 +85,7 @@ The navbar includes a sun/moon icon button on desktop and a `// LIGHT_MODE` / `/
 All site content is data-driven via JSON. No component edits needed for content updates:
 
 | File | Controls |
-|---|---|
+| --- | --- |
 | `data/techStack.json` | Tech console categories + items, certifications |
 | `data/experience.json` | Work history cards |
 | `data/projects.json` | Project cards |
@@ -197,7 +152,7 @@ npm run build
 
 Self-hosted via `public/fonts/`. Required files:
 
-```
+```bash
 public/fonts/
 ├── inter-v20-latin-300.woff2
 ├── inter-v20-latin-regular.woff2
@@ -212,4 +167,3 @@ public/fonts/
 ## License
 
 MIT — feel free to use as a template with attribution.
-

@@ -17,7 +17,7 @@ defineProps({
       <span class="text-code font-mono font-bold text-body group-hover:text-main transition-colors uppercase tracking-widest">
         {{ name }}
       </span>
-      <span class="text-[7px] font-mono text-muted/50 uppercase tracking-tighter group-hover:text-primary/50"> Module_Loaded </span>
+      <span class="text-nano font-mono text-muted/50 uppercase tracking-tighter group-hover:text-primary/50"> Module_Loaded </span>
     </div>
   </div>
 </template>

@@ -45,7 +45,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
       <div class="group cursor-pointer flex items-center gap-3" @click="scrollToSection('hero')">
         <div class="flex items-center gap-2 font-mono">
           <span class="text-primary font-bold text-xs animate-pulse">></span>
-          <span class="text-main text-[12px] font-black uppercase tracking-[0.2em] group-hover:text-primary transition-colors"> TARUN_PABLE </span>
+          <span class="text-main text-xs font-black uppercase tracking-[0.2em] group-hover:text-primary transition-colors"> TARUN_PABLE </span>
           <div class="h-4 w-px bg-muted/50"></div>
           <span class="text-mono-label opacity-60 inline">Cloud_Arch</span>
         </div>

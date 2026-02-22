@@ -27,7 +27,7 @@ onMounted(() => {
     <div class="relative z-10 flex justify-between items-start mb-10 pl-2">
       <div class="flex flex-col gap-1.5">
         <span class="text-label font-mono text-muted uppercase tracking-[0.2em]">Deployment_Ref</span>
-        <span class="text-[13px] font-mono text-body group-hover:text-primary transition-colors uppercase">
+        <span class="text-sm font-mono text-body group-hover:text-primary transition-colors uppercase">
           {{ project.id }}
         </span>
       </div>

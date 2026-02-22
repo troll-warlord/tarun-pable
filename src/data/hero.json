@@ -1,10 +1,17 @@
 {
-  "title": "Architecting the",
+  "name": "Tarun Pable",
+  "title": "Cloud Architect",
+  "tagline": "Architecting the silence between 100 million requests.",
   "highlight": "Invisible.",
   "subtitle": "Senior Cloud Engineer specializing in high-availability systems, multi-cloud orchestration, and infrastructure that doesn't wake you up at 3 AM.",
+  "slo": "99.99%",
+  "cta": [
+    { "label": "CHECK_SYSTEM_HEALTH", "target": "projects", "style": "primary" },
+    { "label": "CONTACT_ROOT",        "target": "contact",  "style": "outline" }
+  ],
   "metrics": [
-    { "label": "Uptime", "value": "99.99%", "status": "nominal" },
-    { "label": "Clusters", "value": "Active", "status": "healthy" },
-    { "label": "Latency", "value": "24ms", "status": "optimized" }
+    { "label": "Uptime",   "value": "99.99%", "status": "nominal"   },
+    { "label": "Clusters", "value": "Active",  "status": "healthy"   },
+    { "label": "Latency",  "value": "24ms",    "status": "optimized" }
   ]
 }

@@ -14,10 +14,11 @@
   --font-sans: 'Inter', ui-sans-serif, system-ui;
   --font-mono: 'Roboto Mono', ui-monospace, 'SFMono-Regular', monospace;
 
-  /* Sub-xs type scale (fills the gap below Tailwind's text-xs=12px) */
-  --text-nano: 0.5625rem; /* 9px  — SVG / micro labels          */
-  --text-code: 0.625rem; /* 10px — mono badges, btn labels     */
+  /* Custom sub-scale (fills the gap below Tailwind's text-sm=14px) */
+  --text-nano: 0.5625rem; /* 9px  — SVG labels, micro badges    */
+  --text-code: 0.625rem;  /* 10px — mono badges, btn labels     */
   --text-label: 0.6875rem; /* 11px — section labels, pill text   */
+  --text-xs: 0.75rem;     /* 12px — navbar brand, compact UI    */
 
   /* Semantic border-radius tokens */
   --radius-card: 1rem; /* 16px — bento / main cards          */
@@ -58,8 +59,8 @@
     --clr-primary-dark: #064e3b;
 
     /* --- Backgrounds --- */
-    --clr-bg-base: #ebebef; /* cool light gray — clearly not white */
-    --clr-bg-surface: #dddde3; /* one step darker for cards/sections */
+    --clr-bg-base: #d4d4d8;    /* zinc-300 — noticeably grey         */
+    --clr-bg-surface: #c8c8ce; /* one step darker for cards/sections */
     --clr-bg-panel: rgba(0, 0, 0, 0.05);
 
     /* --- Borders --- */

@@ -30,8 +30,7 @@ defineProps({
       </span>
     </h3>
 
-    <div class="pipe-description">
-      <div class="pipe-line"></div>
+    <div class="pipe-description mb-8 md:mb-12 border-l-2 border-primary pl-5">
       <p class="description-text">
         {{ description }}
       </p>

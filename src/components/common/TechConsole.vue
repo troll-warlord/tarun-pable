@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import stack from '@/data/techStack.json'
 import TechIcon from '@/components/common/TechIcon.vue'
+import PanelFrame from '@/components/common/PanelFrame.vue'
 
 const activeTab = ref('cloud_platforms')
 
@@ -18,7 +19,7 @@ const handleHover = (id) => {
 </script>
 
 <template>
-  <div class="console-wrapper">
+  <PanelFrame class="console-wrapper">
     <div class="console-sidebar">
       <div class="console-header-area">
         <p class="console-label text-primary/50 text-right lg:text-left">Select_Module_</p>
@@ -55,7 +56,7 @@ const handleHover = (id) => {
         </transition>
       </div>
     </div>
-  </div>
+  </PanelFrame>
 </template>
 
 <style scoped>
@@ -67,10 +68,9 @@ const handleHover = (id) => {
  * Tailwind handles layout/spacing in the template above.
  */
 
+/* Layout only — visual shell is owned by PanelFrame */
 .console-wrapper {
-  @apply flex flex-row gap-0 lg:gap-8 h-137.5 md:h-125 border rounded-xl overflow-hidden;
-  border-color: var(--clr-edge);
-  background-color: color-mix(in srgb, var(--clr-bg-surface), transparent 90%);
+  @apply flex flex-row gap-0 lg:gap-8 h-137.5 md:h-125;
 }
 
 .console-sidebar {

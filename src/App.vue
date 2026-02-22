@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { onMounted, onUnmounted, computed } from 'vue'
 import { useWindowScroll } from '@vueuse/core'
 import Lenis from '@studio-freight/lenis'
 import gsap from 'gsap'
@@ -12,6 +12,7 @@ import Projects from '@/components/sections/Projects.vue'
 import Photography from '@/components/sections/Photography.vue'
 import Contact from '@/components/sections/Contact.vue'
 import Footer from '@/components/layout/Footer.vue'
+import { useMouseTracker } from '@/composables/useMouseTracker.js'
 
 let lenis = null
 
@@ -48,23 +49,7 @@ const scrollPercent = computed(() => {
   return height > 0 ? (y.value / height) * 100 : 0
 })
 
-const mouseX = ref(0)
-const mouseY = ref(0)
-
-const handleMouseMove = (e) => {
-  mouseX.value = e.clientX
-  mouseY.value = e.clientY
-  document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`)
-  document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`)
-}
-
-onMounted(() => {
-  window.addEventListener('mousemove', handleMouseMove)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('mousemove', handleMouseMove)
-})
+const { mouseX, mouseY } = useMouseTracker()
 </script>
 
 <template>
