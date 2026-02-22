@@ -292,7 +292,7 @@
 
   /* Primary CTA button */
   .btn-primary {
-    @apply px-6 py-3 font-mono text-code font-bold uppercase tracking-[0.2em] transition-all;
+    @apply px-6 py-3 font-mono text-code uppercase tracking-[0.2em] transition-all;
     background-color: color-mix(in srgb, var(--clr-primary-dark, #064e3b), transparent 40%);
     color: var(--clr-text-main);
     border: 1px solid var(--clr-primary);
