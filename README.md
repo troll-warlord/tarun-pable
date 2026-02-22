@@ -158,6 +158,7 @@ public/fonts/
 ├── inter-v20-latin-regular.woff2
 ├── inter-v20-latin-600.woff2
 ├── inter-v20-latin-700.woff2
+├── inter-v20-latin-900.woff2
 ├── roboto-v50-latin-regular.woff2
 └── roboto-v50-latin-500.woff2
 ```
